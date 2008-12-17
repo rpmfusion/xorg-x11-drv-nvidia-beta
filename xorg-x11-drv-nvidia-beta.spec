@@ -7,7 +7,7 @@
 %endif
 
 Name:          xorg-x11-drv-nvidia-beta
-Version:       177.61.02
+Version:       180.11.02
 Release:       1%{?dist}
 Summary:       NVIDIA's proprietary display driver for NVIDIA graphic cards
 
@@ -185,6 +185,12 @@ ln -s libnvidia-wfb.so.%{version} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/extensi
 ln -s libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libcuda.so.1
 ln -s libcuda.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libcuda.so
 
+# This is 180.xx adds - vdpau libs and headers
+ln -s libvdpau_nvidia.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libvdpau_nvidia.so
+ln -s libvdpau.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libvdpau.so.1
+ln -s libvdpau.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libvdpau.so
+ln -s libvdpau_trace.so.%{version} $RPM_BUILD_ROOT%{nvidialibdir}/libvdpau_trace.so
+
 # X configuration script
 install -D -p -m 0755 %{SOURCE10} $RPM_BUILD_ROOT%{_sbindir}/nvidia-beta-config-display
 
@@ -253,6 +259,9 @@ fi ||:
 %dir %{nvidialibdir}/tls
 %config %{_sysconfdir}/ld.so.conf.d/nvidia-%{_lib}.conf
 %{nvidialibdir}/*.so.*
+%{nvidialibdir}/libGLcore.so
+%{nvidialibdir}/libvdpau_nvidia.so
+%{nvidialibdir}/libvdpau_trace.so
 %{nvidialibdir}/tls/*.so.*
 
 %files devel
@@ -260,13 +269,21 @@ fi ||:
 %dir %{_includedir}/nvidia
 %dir %{_includedir}/nvidia/GL
 %dir %{_includedir}/nvidia/cuda
+%dir %{_includedir}/nvidia/vdpau
 %{_includedir}/nvidia/GL/*.h
 %{_includedir}/nvidia/cuda/*.h
-%{nvidialibdir}/libXvMCNVIDIA.a
-%{nvidialibdir}/*.so
+%{_includedir}/nvidia/vdpau/*.h
+%exclude %{nvidialibdir}/libXvMCNVIDIA.a
+%{nvidialibdir}/libcuda.so
+%{nvidialibdir}/libGL.so
+%{nvidialibdir}/libvdpau.so
+%{nvidialibdir}/libXvMCNVIDIA.so
 
 
 %changelog
+* Wed Dec 17 2008 kwizart < kwizart at gmail.com > - 180.11.02-1
+- Update to 180.11.02 (opengl 3.0 beta)
+
 * Thu Oct 30 2008 kwizart < kwizart at gmail.com > - 177.61.02-1
 - Rename to nvidia-beta 
 - Update to 177.61.02 (beta with opengl 3.0 support).
