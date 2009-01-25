@@ -8,7 +8,7 @@
 
 Name:          xorg-x11-drv-nvidia-beta
 Version:       180.11.02
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA's proprietary display driver for NVIDIA graphic cards
 
 Group:         User Interface/X Hardware Support
@@ -281,6 +281,9 @@ fi ||:
 
 
 %changelog
+* Sun Jan 25 2009 Stewart Adam < s.adam at diffingo.com > - 180.11.02-2
+- Fix initscript search locations (schlobinux_)
+
 * Wed Dec 17 2008 kwizart < kwizart at gmail.com > - 180.11.02-1
 - Update to 180.11.02 (opengl 3.0 beta)
 
