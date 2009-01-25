@@ -21,10 +21,10 @@ module="noneWithSomeCrazyNameSoItsNeverFound"
 # If one exists, then use it.
 if test -e "${modpath}/extra/${modname}";then
     module="${modpath}/extra/${modname}"
-elif test -e "${modpath}/extra/nvidia/${modname}";then
-    module="${modpath}/extra/nvidia/${modname}"
-elif test -e "${modpath}/kernel/drivers/video/nvidia/${modname}";then
-    module="${modpath}/kernel/drivers/video/nvidia/${modname}"
+elif test -e "${modpath}/extra/${name}/${modname}";then
+    module="${modpath}/extra/${name}/${modname}"
+elif test -e "${modpath}/kernel/drivers/video/${name}/${modname}";then
+    module="${modpath}/kernel/drivers/video/${name}/${modname}"
 fi
 
 
